@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>ILMI – Пулни бошқариш санъати</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load static %}
+
+    <!-- LOCAL CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/accordion.css' %}">
+    <link rel="stylesheet" href="{% static 'css/3steps.css' %}">
+    <link rel="stylesheet" href="{% static 'css/phones.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reviews.css' %}">
+
+    <!-- intl-tel-input CSS (одна версия) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/css/intlTelInput.css">
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- Верхний баннер -->
+    <header class="welcome-banner" id="section-welcome">
+        ILMI платформасига хуш келибсиз!
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="section-hero">
+
+        <!-- Левая часть -->
+        <div class="hero-left">
+            <h2 class="hero-left-title">Эксклюзив курс</h2>
+
+            <div class="hero-video-wrapper"
+                 id="trailer-block"
+                 data-track-section="hero-video">
+
+                <!-- Кастомный mp4-плеер -->
+                <video
+                    id="courseTrailer"
+                    class="video-element"
+                    preload="metadata"
+                    poster="{% static 'media/trailer.jpg' %}">
+                    <source src="{% static 'media/trailer.mp4' %}" type="video/mp4">
+                    Сизнинг браузерингиз видео қўлламайди.
+                </video>
+
+                <!-- Большая кнопка Play по центру -->
+                <button class="video-big-play"
+                        id="trailerBigPlay"
+                        type="button"
+                        aria-label="Трейлерни бошлаш">
+                </button>
+
+                <!-- Кастомные контролы -->
+                <div class="video-controls hide" id="trailerControls">
+                    <button class="vc-btn vc-play"
+                            id="trailerPlayBtn"
+                            type="button">
+                        ▶
+                    </button>
+
+                    <div class="vc-progress">
+                        <div class="vc-progress-bar" id="trailerProgressBar">
+                            <div class="vc-progress-fill" id="trailerProgressFill"></div>
+                        </div>
+                    </div>
+
+                    <span class="vc-time" id="trailerTime">0:00 / 0:00</span>
+
+                    <button class="vc-btn vc-mute"
+                            id="trailerMuteBtn"
+                            type="button">
+                        🔊
+                    </button>
+
+                    <input class="vc-volume"
+                           id="trailerVolume"
+                           type="range"
+                           min="0"
+                           max="1"
+                           step="0.05"
+                           value="1">
+
+                    <button class="vc-btn vc-fullscreen"
+                            id="trailerFullscreenBtn"
+                            type="button">
+                        ⛶
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая часть -->
+        <div class="hero-right">
+
+            <h1 class="course-title" style="text-transform: uppercase; font-family: BEBAS; font-size: 35px;">Пулни бошқариш санъати</h1>
+
+            <p class="course-subtitle">
+                Қисқа вақтда аёллик энергиянгизни ошириб, баракага очилишни ва молиявий эркин бўлишни истасангиз,
+                бу эфир айнан сиз учун!
+            </p>
+
+            <div class="course-tags">
+                <span class="course-tag">Категория - Шахсий ривож</span>
+                <span class="course-tag">Эфирлар сони - 19</span>
+                <span class="course-tag">Доступ муддати - 90 кун</span>
+                <span class="course-tag">Амира Рашидова</span>
+                <span class="course-tag">Паризода Кураҳмедова</span>
+                <span class="course-tag">Азиза Исмаилова</span>
+            </div>
+
+            <div class="course-price-row">
+                <div class="course-price-block">
+                    <span class="course-price-current">121.000 UZS</span>
+                    <span class="course-price-old">1.210.000 UZS</span>
+                </div>
+
+            <div class="course-discount-badge">
+                    Чегирма<br>90%
+                </div>
+            </div>
+
+            <div class="course-cta">
+                <div class="course-cta-row">
+                    <span class="cta-hint">Курснинг илк эфирини <b>БЕПУЛ</b><br>томоша қилишингиз мумкин</span>
+                    <button class="btn btn-green"
+                            id="btn-free-lesson"
+                            data-event-id="free_lesson_click">
+                        БЕПУЛ ҚИСМИНИ КЎРИШ
+                    </button>
+                </div>
+
+                <div class="course-cta-row">
+                    <span class="cta-hint">Курсни тўлиқ форматда 90% чегирма билан олишни истасангиз пастдаги тугмани босинг</span>
+                    <button class="btn btn-pink"
+                            id="btn-buy"
+                            data-event-id="buy_click">
+                        ЧЕГИРМАДА ОЛИШ
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TEXT PROGRAM -->
+    <section class="course-benefits" id="section-benefits" data-track-section="benefits">
+        <h2 class="course-benefits-title">
+            Бу курсдан кейин ҳаммаси бошқача бўлади:
+        </h2>
+
+        <ul class="course-benefits-list">
+            <li>
+                Пул билан тўғри муносабат қилиб, уни кўпайтиришни ўрганасиз,
+            </li>
+            <li>
+                Онгости установкаларингизни англаб, "Изобильная женщина"га айланасиз,
+            </li>
+            <li>
+                Ўз устунлигингиз ва қобилиятингизни аниқлаб, уни монетизация қилишга илҳомланасиз,
+            </li>
+            <li>
+                Ҳаётингизда молиявий оқимни қайта фаоллаштириб, оилавий фаровонликка эришасиз.
+            </li>
+        </ul>
+    </section>
+
+    <!-- ACCORDION PROGRAM -->
+    <section class="course-program">
+        <div class="cp-header">
+            <h2>Курс программаси</h2>
+            <p>4 бўлим / 19 дарс</p>
+        </div>
+
+        <!-- ======== SECTION ======== -->
+        <div class="cp-section">
+            <div class="cp-section-header">Бўлим 1 <span class="cp-arrow">▾</span></div>
+            <div class="cp-lessons">
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 1.png' %}" class="cp-thumb" alt="Дарс 1">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #1</span>
+                        <span class="cp-title">Бойликка очилишнинг сиз билмаган методи</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 2.png' %}" class="cp-thumb" alt="Дарс 2">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #2</span>
+                        <span class="cp-title">Ҳақиқий бахтнинг асл қоидаси</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 3.png' %}" class="cp-thumb" alt="Дарс 3">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #3</span>
+                        <span class="cp-title">Ҳаётга барака келтирувчи оддий қадам</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 4.png' %}" class="cp-thumb" alt="Дарс 4">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #4</span>
+                        <span class="cp-title">Сизни пулдан тўсувчи онгдаги кўникмалар</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 5.png' %}" class="cp-thumb" alt="Дарс 5">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #5</span>
+                        <span class="cp-title">Баракангиз қаерда? Аниқлаймиз!</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ======== SECTION ======== -->
+        <div class="cp-section">
+            <div class="cp-section-header">Бўлим 2 <span class="cp-arrow">▾</span></div>
+            <div class="cp-lessons">
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 6.png' %}" class="cp-thumb" alt="Дарс 6">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #6</span>
+                        <span class="cp-title">Бойлик ёки камбағаллик наслдан ўтадими?</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 7.png' %}" class="cp-thumb" alt="Дарс 7">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #7</span>
+                        <span class="cp-title">Ички қобилият қачон юзага чиқади?</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 8.png' %}" class="cp-thumb" alt="Дарс 8">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #8</span>
+                        <span class="cp-title">Мағлубиятни ғалабага айлантириш формуласи</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 9.png' %}" class="cp-thumb" alt="Дарс 9">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #9</span>
+                        <span class="cp-title">Ҳақиқий баракани қачон сезишни бошлаймиз?</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 10.png' %}" class="cp-thumb" alt="Дарс 10">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #10</span>
+                        <span class="cp-title">Эрнинг баракаси. Аёллар адашадиган асосий нуқта</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ======== SECTION ======== -->
+        <div class="cp-section">
+            <div class="cp-section-header">Бўлим 3 <span class="cp-arrow">▾</span></div>
+            <div class="cp-lessons">
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 11.png' %}" class="cp-thumb" alt="Дарс 11">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #11</span>
+                        <span class="cp-title">Ортиқча тежамкорлик бизни бахтсиз қиладими?</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 12.png' %}" class="cp-thumb" alt="Дарс 12">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #12</span>
+                        <span class="cp-title">Ички энергиянгиз сизни ёки бой ёки камбағал қилади</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 13.png' %}" class="cp-thumb" alt="Дарс 13">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #13</span>
+                        <span class="cp-title">Бараканинг энг содда формуласи</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 14.png' %}" class="cp-thumb" alt="Дарс 14">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #14</span>
+                        <span class="cp-title">"Кўп пул – катта муаммо" — стереотипни парчалаймиз</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 15.png' %}" class="cp-thumb" alt="Дарс 15">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #15</span>
+                        <span class="cp-title">Замонавий ҳаётда даромадни ошириш сирлари</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ======== SECTION ======== -->
+        <div class="cp-section">
+            <div class="cp-section-header">Бўлим 4 <span class="cp-arrow">▾</span></div>
+            <div class="cp-lessons">
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 16.png' %}" class="cp-thumb" alt="Дарс 16">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #16</span>
+                        <span class="cp-title">Баракангиз йўқми? Унда барака калити қаердалигини эшитинг!</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 17.png' %}" class="cp-thumb" alt="Дарс 17">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #17</span>
+                        <span class="cp-title">Қарздорликдан қутилиш техникаси</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 18.png' %}" class="cp-thumb" alt="Дарс 18">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #18</span>
+                        <span class="cp-title">Севги ва пулнинг боғлиқлиғи</span>
+                    </div>
+                </div>
+
+                <div class="cp-lesson">
+                    <img src="{% static 'media/lesson 19.png' %}" class="cp-thumb" alt="Дарс 19">
+                    <div class="cp-info">
+                        <span class="cp-num">Дарс #19</span>
+                        <span class="cp-title">Пулни ўз фойдангизга бошқариш техникаси</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 3 STEPS -->
+    <section class="ilmi-flow" id="ilmi-flow">
+        <div class="ilmi-flow-inner">
+
+            <!-- Логотип -->
+            <img src="{% static 'media/logo.png' %}" alt="ILMI" class="ilmi-flow-logo" id="gotobuy">
+
+            <!-- Подзаголовок -->
+            <p class="ilmi-flow-subtitle">
+                Замонавий билимлар платформаси
+            </p>
+
+            <!-- Линия 1 -->
+            <div class="ilmi-flow-line ilmi-flow-line--top"></div>
+
+            <!-- Капсула 1 -->
+            <div class="ilmi-flow-step ilmi-flow-step--1">
+                <span class="ilmi-flow-dot"></span>
+                <span class="ilmi-flow-text">Юклаб олинг</span>
+            </div>
+
+            <!-- Линия 2 -->
+            <div class="ilmi-flow-line ilmi-flow-line--middle"></div>
+
+            <!-- Капсула 2 -->
+            <div class="ilmi-flow-step ilmi-flow-step--2">
+                <span class="ilmi-flow-dot"></span>
+                <span class="ilmi-flow-text">Керакли йўналишни тангланг</span>
+            </div>
+
+            <!-- Линия 3 -->
+            <div class="ilmi-flow-line ilmi-flow-line--bottom"></div>
+
+            <!-- Капсула 3 -->
+            <div class="ilmi-flow-step ilmi-flow-step--3">
+                <span class="ilmi-flow-dot"></span>
+                <span class="ilmi-flow-text">Ривожланишни бошланг!</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PHONES -->
+    <section class="ilmi-phones">
+        <div class="ilmi-phones-inner">
+
+            <div class="phones-scene">
+
+                <div class="phone phone-left">
+                    <video src="{% static 'media/left.mp4' %}" autoplay muted loop playsinline></video>
+                </div>
+
+                <div class="phone phone-center">
+                    <video src="{% static 'media/center.mp4' %}" autoplay muted loop playsinline></video>
+                </div>
+
+                <div class="phone phone-right">
+                    <video src="{% static 'media/right.mp4' %}" autoplay muted loop playsinline></video>
+                </div>
+
+            </div>
+
+            <div class="typing-wrapper">
+                <span id="typing"></span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- DOWNLOAD BUTTONS -->
+    <section class="ilmi-download">
+        <div class="ilmi-download-inner">
+
+            <div class="store-buttons">
+                <!-- Google Play -->
+                <a href="https://play.google.com/store/apps/details?id=uz.intersoft.ilm_market" class="store-btn store-google">
+                    <div class="store-icon">
+                        <img src="{% static 'media/google-play.svg' %}" alt="Google Play">
+                    </div>
+                    <div class="store-text">
+                        <span class="store-top">GET IT ON</span>
+                        <span class="store-bottom">Google Play</span>
+                    </div>
+                </a>
+
+                <!-- App Store -->
+                <a href="https://apps.apple.com/uz/app/ilmi/id6705116269" class="store-btn store-apple">
+                    <div class="store-icon">
+                        <img src="{% static 'media/app-store.svg' %}" alt="App Store">
+                    </div>
+                    <div class="store-text">
+                        <span class="store-top">Download on the</span>
+                        <span class="store-bottom">App Store</span>
+                    </div>
+                </a>
+            </div>
+
+            <p class="download-caption">
+                ILMI иловасини юклаб олинг, “Пулни бошқариш санъати” курсини ўзингизга энг қулай тўлов усули билан харид қилинг ва ривожланишни бугуноқ бошланг!
+            </p>
+
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="ilmi-reviews">
+        <div class="ilmi-reviews-inner">
+            <h2 class="ilmi-reviews-title" style="font-family: BEBAS; line-height: 1.1; font-size: 35px;">Курсни аллақачон ўзида қўллаган аёллар фикри</h2>
+            <p class="ilmi-reviews-subtitle">
+                “Пулни бошқариш санъати” курсидан кейинги баракага очилган қизлардан ҳақиқий таассуротлар
+            </p>
+
+            <div class="review-stack" id="reviewStack">
+                <!-- 3 карточки-слоя, контент JS подставляет динамически -->
+                <div class="review-card-stack-item stack-pos-0">
+                    <div class="review-card-inner">
+                        <div class="review-header">
+                            <div class="review-avatar">A</div>
+                            <div class="review-name"></div>
+                            <div class="review-stars">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                        </div>
+                        <div class="review-bubble">
+                            <p class="review-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card-stack-item stack-pos-1">
+                    <div class="review-card-inner">
+                        <div class="review-header">
+                            <div class="review-avatar">A</div>
+                            <div class="review-name"></div>
+                            <div class="review-stars">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                        </div>
+                        <div class="review-bubble">
+                            <p class="review-text"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card-stack-item stack-pos-2">
+                    <div class="review-card-inner">
+                        <div class="review-header">
+                            <div class="review-avatar">A</div>
+                            <div class="review-name"></div>
+                            <div class="review-stars">
+                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                            </div>
+                        </div>
+                        <div class="review-bubble">
+                            <p class="review-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="ilmi-help">
+        <div class="ilmi-help-inner">
+            <h2 class="ilmi-help-title" style="font-family: BEBAS; font-size: 28px;">
+                ILMI онлайн платформасини юклаб олишда қийналаяпсизми?
+            </h2>
+            <p class="ilmi-help-subtitle">
+                Биз ўзимиз сизга ёрдам берамиз – қисқа ариза қолдиринг, менеджер қўнғироқ қилади
+                ва курсни сотиб олишда ёрдам беради.
+            </p>
+
+            <!-- форма лида -->
+            <form class="ilmi-help-form"
+                  method="post"
+                  action="/leads/ilmi-download/">
+                {% csrf_token %}
+
+                <div class="ilmi-help-field">
+                    <input type="text"
+                           name="lead_full_name"
+                           placeholder="Исмингизни киритинг"
+                           required>
+                </div>
+
+                <div class="ilmi-help-field">
+                    <input id="phone"
+                           type="tel"
+                           name="lead_phone"
+                           inputmode="tel"
+                           placeholder="Телефон рақамингиз"
+                           required>
+                </div>
+
+                <button type="submit" class="ilmi-help-submit">
+                    Менеджерга юбориш
+                </button>
+
+                <p class="ilmi-help-hint">
+                    Бу тугмани босиш орқали маълумотларингизни кўриб чиқишга ва платформамиздан фойдаланиш офертасига розилик билдирасиз
+                </p>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+<!-- POPUP -->
+<div class="modal-backdrop" id="freeLessonModal">
+    <!-- главный попап -->
+    <div class="modal" id="freeLessonMain">
+
+        <button class="modal-close" id="modalCloseBtn">×</button>
+
+        <!-- Шаг 1: форма -->
+        <div class="modal-step modal-step-form is-active" id="modalStepForm">
+            <h2 class="modal-title">ОЛДИН ТАНИШИБ ОЛСАК</h2>
+            <p class="modal-text">
+                Бепул дарсни томоша қилиш учун исмингизни ва телефон рақамингизни киритинг.
+            </p>
+
+            <form id="freeLessonForm" autocomplete="off">
+
+                <label class="form-field">
+                    <span>ФИО</span>
+                    <input type="text" name="full_name" required minlength="2"
+                           placeholder="Исмингизни киритинг">
+                </label>
+
+                <label class="form-field">
+                    <span>Телефон рақамингиз</span>
+                    <input type="tel" name="phone" required placeholder="+998 XX XXX XX XX">
+                </label>
+
+                <button type="submit" class="btn btn-pink modal-submit-btn"
+                        data-event-id="free_lesson_submit">
+                    Дарсни томоша қилиш
+                </button>
+
+                <p class="modal-hинt" style="color: grey; font-size: 12px; text-align: center; margin-top: 20px; margin-bottom: 20px;">
+                    СМС код талаб қилинмайди.<br>Телефон рақамингиз фақат боғланиш учун керак.
+                </p>
+
+            </form>
+        </div>
+
+        <!-- Шаг 2: видео + текст -->
+        <div class="modal-step modal-step-video" id="modalStepVideo">
+            <h2 class="modal-title">БЕПУЛ ДАРС</h2>
+
+            <div class="modal-video-scroll">
+                <div class="hero-video-wrapper lesson-video-wrapper"
+                     id="freeLessonBlock">
+
+                    <video
+                        id="freeLessonVideo"
+                        class="video-element"
+                        preload="metadata"
+                        poster=""
+                        controlslist="nodownload noremoteplayback"
+                        disablepictureinpicture
+                        playsinline>
+                        <!-- src подставим из JS -->
+                    </video>
+
+                    <button class="video-big-play"
+                            id="freeLessonBigPlay"
+                            type="button"
+                            aria-label="Дәрсни бошлаш"></button>
+
+                    <div class="video-controls hide" id="freeLessonControls">
+                        <button class="vc-btn vc-play"
+                                id="freeLessonPlayBtn"
+                                type="button">▶</button>
+
+                        <div class="vc-progress">
+                            <div class="vc-progress-bar" id="freeLessonProgressBar">
+                                <div class="vc-progress-fill" id="freeLessonProgressFill"></div>
+                            </div>
+                        </div>
+
+                        <span class="vc-time" id="freeLessonTime">0:00 / 0:00</span>
+
+                        <button class="vc-btn vc-mute"
+                                id="freeLessonMuteBtn"
+                                type="button">🔊</button>
+
+                        <input class="vc-volume"
+                               id="freeLessonVolume"
+                               type="range"
+                               min="0"
+                               max="1"
+                               step="0.05"
+                               value="1">
+
+                        <button class="vc-btn vc-fullscreen"
+                                id="freeLessonFullscreenBtn"
+                                type="button">⛶</button>
+                    </div>
+                </div>
+
+                <div class="lesson-modal-text">
+                    <h3 class="lesson-lesson-title">Кўп пул катта муаммо келтириб чиқарадими?</h3>
+                    <p class="lesson-lesson-desc">
+                        <b>Кўпчилик аёллар орасида бир иллюзия бор:</b><br>
+                        <i>“Даромадим ошса, муаммоларим ҳам кўпаяди”</i>. <br>
+                        Ушбу эфиримиз айнан шу нотўғри установкадан халос бўлиб, даромадга чиқишда ёрдам беради.<br><br>
+
+                        Пулингиз кўпайиши, бойиб кетиш — муаммо эмас, агар сиз пулни тўғри бошқаришни ва
+                        ички қўрқувлардан узилишни билсангиз<br><br>
+
+                        <b>Ушбу дарсда:</b><br>
+                        • Пул кўпайиб, имкониятлар кенгайишини;<br>
+                        • Жавобгарликдан қўрқмаслик ва қарор қабул қилиш усулларини;<br>
+                        • Даромадни бошқариш орқали ҳаётингизда барқарорлик яратишни;<br>
+                        • Пулдан қўрқиш ўрнига уни фойдага айлантириш йўлларини билиб оласиз<br><br>
+
+                        <b>Эфирни кўргач сиз:</b><br>
+                        “Катта пул = катта муаммо” деган формулани синдириб, уни “Катта пул = улкан имкониятлар” фикрига ўзгартирасиз.<br><br>
+
+                        ILMI иловасини юклаб олинг ва тўлиқ дарсни томоша қилиб, қисқа вақт ичида молиявий эркинликка қадам қўйинг.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- нижний попап с кнопкой -->
+    <div class="lesson-bottom-sheet" id="lessonBottomSheet">
+        <div class="lesson-bottom-inner">
+            <button class="lesson-bottom-btn" id="lessonBottomCta" type="button">
+                ЧЕГИРМАДА ТЎЛИҚ КУРСНИ ОЛИШ
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- LOCAL SCRIPT -->
+<script src="{% static 'js/script.js' %}"></script>
+
+<!-- intl-tel-input JS (одна версия) -->
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/intlTelInput.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/utils.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const buyBtn  = document.getElementById('btn-buy');
+    const logoEl  = document.getElementById('gotobuy');
+
+    if (!buyBtn || !logoEl) return;
+
+    buyBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const rect   = logoEl.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        const elementTop    = rect.top + scrollTop;
+        const elementHeight = rect.height;
+        const viewportHeight = window.innerHeight;
+
+        const targetScroll = elementTop - (viewportHeight / 2) + (elementHeight / 2);
+
+        // 1) основной скролл к центру
+        window.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth'
+        });
+
+        // 2) мягкий скролл 100px за 1 секунду
+        setTimeout(() => {
+            animateScrollDown(100, 1000);
+        }, 800);
+    });
+
+    function animateScrollDown(distance, duration) {
+        const start = window.pageYOffset;
+        const end = start + distance;
+        const startTime = performance.now();
+
+        function step(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+
+            window.scrollTo(0, start + (end - start) * ease);
+
+            if (elapsed < duration) {
+                requestAnimationFrame(step);
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
+});
+</script>
+
+</body>
+</html>
