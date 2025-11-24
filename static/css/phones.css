@@ -1,0 +1,220 @@
+/* ===== SECTION WRAPPER ===== */
+
+.ilmi-phones {
+    background: var(--bg-main); /* было #000 */
+    overflow: hidden;
+}
+
+.ilmi-phones-inner {
+    max-width: 1050px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+/* ===== TYPING TEXT BELOW PHONES ===== */
+
+.typing-wrapper {
+    margin-top: 330px;
+    font-size: 26px;
+    color: #1b1d29;          /* тёмный текст вместо белого */
+    font-weight: 500;
+
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.35;
+}
+
+#typing {
+    position: relative;
+    display: inline;          /* важно: inline */
+    padding-right: 2px;
+    white-space: pre-line;    /* перенос по \n + auto-wrap */
+}
+
+/* курсор всегда у последней строки */
+#typing::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    bottom: 0;
+    width: 2px;
+    height: 1.1em;
+    background: #1b1d29;      /* курсор тоже тёмный */
+    animation: typing-caret-blink 0.7s steps(1) infinite;
+}
+
+/* мигание курсора */
+@keyframes typing-caret-blink {
+    0%, 50%   { opacity: 1; }
+    50.01%,100% { opacity: 0; }
+}
+
+/* ===== PHONE BASE STYLE ===== */
+
+.phone {
+    width: 240px;
+    height: 480px;
+    border-radius: 32px;
+    background: #ffffff;                          /* было #111 */
+    border: 6px solid #303135;                    /* светлая рамка вместо тёмной */
+    box-shadow: 0 22px 55px rgba(25, 30, 60, 0.15); /* мягкая светлая тень */
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    opacity: 0;
+    transform-origin: center bottom;
+}
+
+.phone video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== CENTER PHONE ===== */
+
+.phone-center {
+    z-index: 3;
+    opacity: 1;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+}
+
+/* ===== LEFT & RIGHT PHONE POSITIONS ===== */
+
+.phone-left {
+    z-index: 2;
+    transform: translateX(-50%) translateY(40px) scale(0.8) rotate(-11deg);
+    animation: leftEnter 0.9s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+.phone-right {
+    z-index: 2;
+    transform: translateX(-50%) translateY(40px) scale(0.8) rotate(11deg);
+    animation: rightEnter 0.9s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+/* ===== ANIMATIONS (DESKTOP) ===== */
+
+@keyframes leftEnter {
+    0% {
+        transform: translateX(-50%) translateY(60px) scale(0.5) rotate(-22deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(calc(-50% - 140px)) translateY(-40px) scale(0.85) rotate(-11deg);
+        opacity: 1;
+    }
+}
+
+@keyframes rightEnter {
+    0% {
+        transform: translateX(-50%) translateY(60px) scale(0.5) rotate(22deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(calc(-50% + 140px)) translateY(-40px) scale(0.85) rotate(11deg);
+        opacity: 1;
+    }
+}
+
+/* ===== TABLET / SMALL DESKTOP ===== */
+
+@media (max-width: 900px) {
+    .phone {
+        width: 210px;
+        height: 420px;
+    }
+
+    .typing-wrapper {
+        margin: 250px auto 0;
+        font-size: 22px;
+    }
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 650px) {
+
+    .phone {
+        width: 170px;
+        height: 340px;
+        border-width: 5px;
+    }
+
+    @keyframes leftEnter {
+        0% {
+            transform: translateX(-50%) translateY(50px) scale(0.5) rotate(-22deg);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(calc(-50% - 80px)) translateY(-20px) scale(0.82) rotate(-11deg);
+            opacity: 1;
+        }
+    }
+
+    @keyframes rightEnter {
+        0% {
+            transform: translateX(-50%) translateY(50px) scale(0.5) rotate(22deg);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(calc(-50% + 80px)) translateY(-20px) scale(0.82) rotate(11deg);
+            opacity: 1;
+        }
+    }
+
+    .typing-wrapper {
+        margin: 220px auto 0;
+        font-size: 18px;
+        max-width: 280px;
+    }
+}
+
+/* ===== VERY SMALL MOBILE ===== */
+
+@media (max-width: 430px) {
+
+    .phone {
+        width: 145px;
+        height: 300px;
+    }
+
+    @keyframes leftEnter {
+        0% {
+            transform: translateX(-50%) translateY(-50px) scale(0.5);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(calc(-50% - 85px)) translateY(-25px) scale(0.78) rotate(-11deg);
+            opacity: 1;
+        }
+    }
+
+    @keyframes rightEnter {
+        0% {
+            transform: translateX(-50%) translateY(-50px) scale(0.5);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(calc(-50% + 85px)) translateY(-25px) scale(0.78) rotate(11deg);
+            opacity: 1;
+        }
+    }
+
+    .typing-wrapper {
+        margin: 50px auto 0;
+        font-size: 16px;
+        max-width: 260px;
+    }
+}

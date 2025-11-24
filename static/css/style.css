@@ -1,0 +1,829 @@
+:root {
+    /* Светлая ILMI-тема */
+    --bg-main: #faf9f6;
+    --bg-panel: #ffffff;
+    --bg-chip: #ffffff;
+    --bg-chip-hover: #e2e4ef;
+    --text-main: #1b1d29;
+    --text-muted: #63646b;
+    --btn-pink: #ff0f6a;
+}
+
+@font-face {
+    font-family: BEBAS;
+    src: url(../font/BebasNeue_Regular__1178_aza_1179_sha__1241_ripter.otf);
+}
+
+
+/* === Подключаем SF Pro Text === */
+
+@font-face {
+    font-family: "SF Pro Text";
+    src: url("fonts/SFProText-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    src: url("fonts/SFProText-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    src: url("fonts/SFProText-Semibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    src: url("fonts/SFProText-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Если используешь italic-версии: */
+@font-face {
+    font-family: "SF Pro Text";
+    src: url("fonts/SFProText-RegularItalic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* === Глобально применяем ко всему сайту === */
+
+html, body {
+    font-family: "SF Pro Text", -apple-system, system-ui, BlinkMacSystemFont,
+                 "Segoe UI", sans-serif;
+}
+
+/* На всякий случай для форм/кнопок, если сбиваются: */
+button, input, textarea, select {
+    font-family: inherit;
+}
+
+
+
+/* ===== BASE ===== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 40px 80px;
+}
+
+/* ===== TOP TEXT ===== */
+
+.welcome-banner {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 32px;
+    color: var(--text-muted);
+}
+
+/* ===== HERO LAYOUT ===== */
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.3fr);
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* ===== LEFT COLUMN ===== */
+
+.hero-left-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+/* VIDEO WRAPPER */
+
+.hero-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;       /* 16:9 */
+    border-radius: 18px;
+    overflow: hidden;
+    background: #000000;       /* фон под видео, оставляем тёмный для контраста */
+}
+
+/* video во всю область блока */
+
+.hero-video-wrapper video,
+.hero-video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+}
+
+/* ===== RIGHT COLUMN ===== */
+
+.hero-right {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.course-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: var(--text-main);
+}
+
+.course-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 22px;
+    max-width: 430px;
+}
+
+/* TAGS */
+
+.course-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 26px;
+    
+}
+
+.course-tag {
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--bg-chip);
+    font-size: 13px;
+    color: var(--text-main);
+    transition: background 0.12s ease;
+    box-shadow:
+        0 16px 32px rgba(0, 0, 0, 0.12),   /* мягкая нижняя тень */
+        0 -4px 12px rgb(255, 255, 255); /* светлая верхняя тень */
+}
+
+.course-tag:hover {
+    background: var(--bg-chip-hover);
+}
+
+/* ===== PRICE + DISCOUNT ===== */
+
+.course-price-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 26px;
+}
+
+.course-price-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-price-current {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.course-price-old {
+    font-size: 17px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+/* скидка — круг справа */
+
+.course-discount-badge {
+    background: var(--btn-pink);
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* ===== CTA BUTTONS ===== */
+
+.course-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: auto;
+}
+
+.course-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn {
+    border: none;
+    padding: 16px 38px;
+    border-radius: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.12s ease;
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+.btn-green {
+    background: #37c96a;
+    color: #ffffff;
+}
+
+.btn-green:hover {
+    background: #41d876;
+}
+
+.btn-pink {
+    background: var(--btn-pink);
+    color: #ffffff;
+}
+
+.btn-pink:hover {
+    background: #ff2c7f;
+}
+
+.cta-hint {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ===== MODAL ===== */
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 16px;
+}
+
+.modal-backdrop.is-visible {
+    display: flex;
+}
+
+.modal {
+    width: 100%;
+    max-width: 470px;
+    background: var(--bg-panel);
+    color: var(--text-main);
+    border-radius: 18px;
+    padding: 22px 20px 20px;
+    position: relative;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
+}
+
+.modal-close {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.modal-text {
+    font-size: 14px;
+    margin-bottom: 18px;
+    color: var(--text-muted);
+}
+
+.form-field {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-field input {
+    border-radius: 10px;
+    border: 1px solid #d0d3e2;
+    padding: 10px;
+    font-size: 14px;
+    background: #ffffff;
+    color: var(--text-main);
+}
+
+.form-field input::placeholder {
+    color: #b0b3c3;
+}
+
+.modal-submit-btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.modal-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+/* шаги */
+
+.modal-step {
+    display: none;
+}
+
+.modal-step.is-active {
+    display: block;
+}
+
+/* видео в модалке */
+
+.modal-video-wrapper {
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000000;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-video-wrapper iframe,
+.modal-video-wrapper video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* -------------------------------------------------------
+   КАСТОМНЫЙ MP4 ПЛЕЕР
+------------------------------------------------------- */
+
+/* Большая кнопка Play по центру */
+.video-big-play {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    margin: auto;
+    width: 94px;
+    height: 94px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: radial-gradient(circle at 30% 30%, #ffffff55, #000000cc);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+
+.video-big-play::before {
+    content: "";
+    border-style: solid;
+    border-width: 18px 0 18px 28px;
+    border-color: transparent transparent transparent #ffffff;
+    margin-left: 6px;
+}
+
+.video-big-play:hover {
+    transform: scale(1.05);
+}
+
+/* Скрываем, когда видео запущено */
+.video-big-play.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Контейнер контролов */
+.video-controls {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    width: calc(100% - 24px);
+    margin: 0 auto;
+    opacity: 1;
+    transition: 0.25s ease;
+}
+
+.video-controls.hide {
+    opacity: 0;
+}
+
+/* Общие кнопки */
+.vc-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s ease;
+}
+
+.vc-btn:hover {
+    transform: scale(1.15);
+}
+
+/* Прогресс-бар */
+.vc-progress {
+    flex: 1;
+}
+
+.vc-progress-bar {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    background: #e2e4ef;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.vc-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--btn-pink);
+    border-radius: 4px;
+}
+
+/* Время */
+.vc-time {
+    font-size: 13px;
+    color: #f9fafb;
+    min-width: 85px;
+    text-align: center;
+}
+
+/* Volume */
+.vc-volume {
+    width: 80px;
+    accent-color: var(--btn-pink);
+}
+
+/* Fullscreen icon */
+.vc-fullscreen {
+    font-size: 20px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+    .page-wrapper {
+        padding: 24px 16px 40px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 34px;
+    }
+
+    .hero-left-title {
+        font-size: 26px;
+    }
+
+    .course-title {
+        font-size: 26px;
+    }
+
+    .course-price-row {
+        justify-content: flex-start;
+        gap: 20px;
+    }
+
+    .course-cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+/* более узкие экраны – приводим к виду референса */
+
+@media (max-width: 600px) {
+
+    .hero-left-title,
+    .course-title,
+    .welcome-banner {
+        text-align: center;
+    }
+
+    .hero {
+        gap: 24px;
+    }
+
+    .hero-right {
+        align-items: center;
+        text-align: center;
+    }
+
+    .course-subtitle {
+        max-width: 100%;
+    }
+
+    .course-tags {
+        justify-content: center;
+    }
+
+    .course-price-row {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .course-cta {
+        width: 100%;
+        align-items: center;
+    }
+
+    .course-cta-row {
+        width: 100%;
+        align-items: center;
+    }
+
+    .course-cta-row .btn {
+        width: 100%;
+        max-width: 360px;
+        justify-content: center;
+    }
+
+    .cta-hint {
+        text-align: center;
+        max-width: 360px;
+    }
+
+    .hero-video-wrapper {
+        border-radius: 16px;
+    }
+
+    .video-controls {
+        width: calc(100% - 16px);
+        bottom: 8px;
+        padding-inline: 10px;
+    }
+
+    .video-big-play {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+/* ============================
+   FREE LESSON MODAL (60% высоты)
+============================ */
+
+#freeLessonModal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(5px);
+    transition: opacity 0.28s ease;
+}
+
+#freeLessonModal.is-visible {
+    display: flex;
+}
+
+/* === Главный попап === */
+
+#freeLessonModal .modal {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 500px;           /* было 480px */
+    max-height: 60vh;
+    margin: 0 16px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+    padding: 18px 18px 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.35s cubic-bezier(0.19,1,0.22,1), opacity 0.35s ease-out;
+}
+
+/* уходит вверх */
+#freeLessonModal .modal.modal-slide-up {
+    transform: translateY(-60px);
+    opacity: 0;
+}
+
+#freeLessonModal .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    border: none;
+    background: rgba(0,0,0,0.05);
+    font-size: 20px;
+    cursor: pointer;
+    color: #444a55;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#freeLessonModal .modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 32px 10px 4px;
+}
+
+#freeLessonModal .modal-step {
+    display: none;
+    flex: 1 1 auto;
+}
+
+#freeLessonModal .modal-step.is-active {
+    display: block;
+}
+
+/* область скролла */
+#freeLessonModal .modal-video-scroll {
+    max-height: calc(60vh - 60px);
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* текст под видео */
+.lesson-modal-text {
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.lesson-lesson-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.lesson-lesson-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4b4f60;
+}
+
+/* ============================
+   НИЖНИЙ ПОПАП (BOTTOM SHEET)
+============================ */
+
+.lesson-bottom-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;                /* прилегает к низу */
+    z-index: 10000;
+    transform: translateY(110%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.19,1,0.22,1), opacity 0.28s ease-out;
+}
+
+/* выезжает */
+.lesson-bottom-sheet.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* уходит вниз */
+.lesson-bottom-sheet.lesson-slide-down {
+    transform: translateY(110%);
+    opacity: 0;
+}
+
+.lesson-bottom-inner {
+    margin: 0 auto;
+    max-width: 500px;          /* было 480px */
+    padding: 16px 18px calc(16px + env(safe-area-inset-bottom));
+    background: #ffffff;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -8px 40px rgba(15, 23, 42, 0.45);
+    display: flex;
+    justify-content: center;
+}
+
+/* кнопка */
+.lesson-bottom-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 15px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #ff0f6a; /* розовый ILMI */
+    color: #ffffff;
+    box-shadow: 0 14px 34px rgba(255, 15, 106, 0.55);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.lesson-bottom-btn:hover {
+    background: #ff2b87;
+    box-shadow: 0 18px 42px rgba(255, 15, 106, 0.65);
+}
+
+.lesson-bottom-btn:active {
+    transform: scale(0.96) translateY(1px);
+}
+
+@media (max-width: 420px) {
+    #freeLessonModal .modal {
+        padding: 14px 12px 12px;
+        border-radius: 20px;
+    }
+
+    #freeLessonModal .modal-title {
+        font-size: 16px;
+    }
+
+    .lesson-lesson-desc {
+        font-size: 13px;
+    }
+
+    .lesson-bottom-inner {
+        border-radius: 18px 18px 0 0;
+        padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+    }
+}
+
+/* Фикс ширины попапа бесплатного урока */
+#freeLessonModal .modal {
+    max-width: 500px;   /* +20px к прежним 480 */
+    margin: 0 6px;      /* было 0 16px — за счёт этого реально +20px по ширине */
+}
+
+/* Чтобы нижний попап совпадал по ширине с верхним */
+.lesson-bottom-inner {
+    max-width: 500px;
+}

@@ -1,0 +1,6 @@
+db.sqlite3
+__pycache__/
+*.pyc
+.env
+static/media/free-lesson.mp4
+static/media/trailer.mp4

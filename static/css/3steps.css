@@ -1,0 +1,160 @@
+/* ===== ILMI FLOW SECTION ===== */
+
+.ilmi-flow {
+    background: #faf9f6; /* молочный фон */
+    color: #1b1d29;
+    padding: 80px 16px 120px;
+}
+
+.ilmi-flow-inner {
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Логотип */
+
+.ilmi-flow-logo {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto 18px;
+}
+
+/* Подзаголовок */
+
+.ilmi-flow-subtitle {
+    font-size: 18px;
+    line-height: 1.35;
+    margin-bottom: 40px;
+    color: #44485a;
+}
+
+/* Общие настройки линий и капсул */
+
+.ilmi-flow-line,
+.ilmi-flow-step {
+    opacity: 0;
+}
+
+/* Вертикальные линии */
+
+.ilmi-flow-line {
+    width: 1px;
+    height: 90px;
+    margin: 0 auto;
+    background: linear-gradient(
+        to bottom,
+        rgba(60,60,70,0.35),
+        rgba(60,60,70,0.08)
+    );
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 0.45s ease-out, opacity 0.45s ease-out;
+}
+
+/* Капсулы */
+
+.ilmi-flow-step {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 34px;
+    border-radius: 999px;
+
+    background: #ffffff;
+    border: 1px solid #ffffff;
+
+    box-shadow:
+        0 6px 22px rgba(30,30,40,0.07),
+        0 2px 4px rgba(30,30,40,0.05);
+
+    margin: 22px auto 26px;
+    transform: scale(0.6);
+    transition: transform 0.45s ease-out, opacity 0.45s ease-out;
+}
+
+/* Контент внутри капсул */
+
+.ilmi-flow-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #37c96a;
+    margin-right: 10px;
+
+    box-shadow: 0 0 8px rgba(55,201,106,0.6);
+    flex-shrink: 0;
+}
+
+.ilmi-flow-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1b1d29;
+}
+
+/* Состояние "виден" – из JS */
+
+.ilmi-flow-line.visible {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.ilmi-flow-step.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== Адаптив ===== */
+
+@media (max-width: 600px) {
+    .ilmi-flow {
+        padding: 60px 16px 80px;
+    }
+
+    .ilmi-flow-logo {
+        width: 160px;
+        margin-bottom: 10px;
+    }
+
+    .ilmi-flow-subtitle {
+        font-size: 16px;
+        margin-bottom: 30px;
+        max-width: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    .ilmi-flow-line {
+        height: 70px;
+    }
+
+    .ilmi-flow-step {
+        padding: 12px 26px;
+        margin: 18px auto 22px;
+    }
+
+    .ilmi-flow-text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    .ilmi-flow-subtitle {
+        font-size: 15px;
+    }
+
+    .ilmi-flow-step {
+        padding: 10px 22px;
+    }
+
+    .ilmi-flow-text {
+        font-size: 15px;
+    }
+}
+
+/* фикс высоты линий, чтобы на всех экранах одинаково */
+.ilmi-flow-line {
+    height: 60px;
+    transform-origin: top;
+}
